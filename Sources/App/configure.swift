@@ -4,6 +4,13 @@ import Vapor
 /// Called before your application initializes.
 ///
 /// https://docs.vapor.codes/3.0/getting-started/structure/#configureswift
+
+struct LoginRequest: Content {
+    var email: String
+    var password: String
+}
+
+
 public func configure(
     _ config: inout Config,
     _ env: inout Environment,
@@ -12,10 +19,15 @@ public func configure(
     /// Register providers first
     try services.register(FluentSQLiteProvider())
 
-    /// Register routes to the router
+    /// Register routes to the router //注册到路由器中的路由
     let router = EngineRouter.default()
     try routes(router)
     services.register(router, as: Router.self)
+    
+    
+    
+    
+    
 
     /// Register middleware
     var middlewares = MiddlewareConfig() // Create _empty_ middleware config
